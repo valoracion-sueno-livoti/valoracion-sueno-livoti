@@ -47,6 +47,12 @@
         <div class="error-mensaje">Completá el apellido del bebé.</div>
       </div>
 
+      <div class="campo" data-tipo="fecha">
+        <label class="campo-etiqueta" for="pac_fecha_nacimiento">Fecha de nacimiento del bebé</label>
+        <input type="date" id="pac_fecha_nacimiento" name="pac_fecha_nacimiento">
+        <div class="error-mensaje">Completá la fecha de nacimiento.</div>
+      </div>
+
       <div class="campo" data-tipo="texto">
         <label class="campo-etiqueta" for="pac_cobertura">Cobertura médica</label>
         <div class="campo-ayuda">Escriba el nombre de la obra social o prepaga, o "Particular" si no tiene cobertura.</div>
@@ -84,15 +90,8 @@
         <div class="error-mensaje">Elegí una opción.</div>
       </div>
 
-      <div class="campo" data-tipo="numero">
-        <label class="campo-etiqueta" for="f3_edad_meses"><span class="campo-numero">3.</span>¿Qué edad tiene su hijo/a?</label>
-        <div class="campo-ayuda">Ingrese la edad en meses (por ejemplo: 8)</div>
-        <input type="number" id="f3_edad_meses" name="f3_edad_meses" min="0" max="24" inputmode="numeric">
-        <div class="error-mensaje">Ingresá la edad en meses.</div>
-      </div>
-
       <div class="campo" data-tipo="radio">
-        <label class="campo-etiqueta"><span class="campo-numero">4.</span>¿Su hijo/a fue prematuro (nació antes de las 37 semanas de gestación)?</label>
+        <label class="campo-etiqueta"><span class="campo-numero">3.</span>¿Su hijo/a fue prematuro (nació antes de las 37 semanas de gestación)?</label>
         <div class="opciones en-linea" data-name="f4_prematuro">
           <div class="opcion"><input type="radio" name="f4_prematuro" id="f4_si" value="Sí"><label for="f4_si">Sí</label></div>
           <div class="opcion"><input type="radio" name="f4_prematuro" id="f4_no" value="No"><label for="f4_no">No</label></div>
@@ -102,7 +101,7 @@
       </div>
 
       <div class="campo" data-tipo="radio">
-        <label class="campo-etiqueta"><span class="campo-numero">5.</span>El sexo biológico de mi hijo/a es</label>
+        <label class="campo-etiqueta"><span class="campo-numero">4.</span>El sexo biológico de mi hijo/a es</label>
         <div class="opciones en-linea" data-name="f5_sexo">
           <div class="opcion"><input type="radio" name="f5_sexo" id="f5_m" value="Masculino"><label for="f5_m">Masculino</label></div>
           <div class="opcion"><input type="radio" name="f5_sexo" id="f5_f" value="Femenino"><label for="f5_f">Femenino</label></div>
@@ -112,14 +111,14 @@
       </div>
 
       <div class="campo" data-tipo="texto">
-        <label class="campo-etiqueta" for="f6_pais"><span class="campo-numero">6.</span>¿En qué país/región reside actualmente?</label>
+        <label class="campo-etiqueta" for="f6_pais"><span class="campo-numero">5.</span>¿En qué país/región reside actualmente?</label>
         <div class="campo-ayuda">Ingrese el país o región donde vive (por ejemplo: Argentina)</div>
         <input type="text" id="f6_pais" name="f6_pais" autocomplete="off">
         <div class="error-mensaje">Completá el país o región.</div>
       </div>
 
       <div class="campo" data-tipo="radio">
-        <label class="campo-etiqueta"><span class="campo-numero">7.</span>¿Cuántas noches a la semana se ocupa de su hijo/a a la hora de acostarlo y/o durante la noche?</label>
+        <label class="campo-etiqueta"><span class="campo-numero">6.</span>¿Cuántas noches a la semana se ocupa de su hijo/a a la hora de acostarlo y/o durante la noche?</label>
         <div class="opciones en-linea" data-name="f7_noches_semana">
           <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_0" value="0"><label for="f7_0">0</label></div>
           <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_1" value="1"><label for="f7_1">1</label></div>

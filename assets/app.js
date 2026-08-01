@@ -96,6 +96,9 @@ function validarPaso(indice) {
     } else if (tipo === "hora") {
       const input = campo.querySelector("input[type=time]");
       campoValido = input.value !== "";
+    } else if (tipo === "fecha") {
+      const input = campo.querySelector("input[type=date]");
+      campoValido = input.value !== "";
     } else if (tipo === "duracion") {
       const inputs = campo.querySelectorAll("input[type=number]");
       campoValido = Array.from(inputs).every((i) => i.value !== "" && Number(i.value) >= 0);
@@ -188,5 +191,9 @@ function enviarFormulario() {
 }
 
 /* ---------- Inicio ---------- */
+
+document.querySelectorAll('input[type="date"]').forEach((input) => {
+  input.max = new Date().toISOString().slice(0, 10);
+});
 
 mostrarPaso(0);

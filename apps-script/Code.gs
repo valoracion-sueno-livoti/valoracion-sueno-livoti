@@ -43,6 +43,7 @@ function crearDocumentoPaciente(d) {
   const apellido = (d.pac_apellido || "").trim();
   const cobertura = (d.pac_cobertura || "").trim();
   const fecha = formatearFecha(new Date());
+  const edad = calcularEdadExacta(d.pac_fecha_nacimiento, new Date());
 
   const nombreArchivo = `${apellido} ${nombre} - ${fecha} - ${cobertura}`;
 
@@ -58,12 +59,19 @@ function crearDocumentoPaciente(d) {
   subtitulo.setHeading(DocumentApp.ParagraphHeading.SUBTITLE);
 
   body.appendParagraph(`Paciente: ${nombre} ${apellido}`);
+  body.appendParagraph(`Fecha de nacimiento: ${formatearFechaCorta(d.pac_fecha_nacimiento)}`);
+  body.appendParagraph(`Edad al momento de la consulta: ${formatearEdad(edad)}`);
   body.appendParagraph(`Cobertura: ${cobertura || "No especificada"}`);
   body.appendParagraph(`Fecha de envío: ${fecha}`);
   body.appendHorizontalRule();
 
   // ---------- Resumen calculado ----------
-  const resumen = calcularResumen(d);
+  const resumen = calcularResumen(d, edad);
+
+  // ---------- Devolución orientativa (al inicio del doc) ----------
+  agregarDevolucion(body, resumen);
+  body.appendHorizontalRule();
+
   agregarResumen(body, resumen);
   body.appendHorizontalRule();
 
@@ -87,8 +95,8 @@ function crearDocumentoPaciente(d) {
 /* ============================================================
    Cálculo del resumen (señales orientativas, no diagnóstico)
    ============================================================ */
-function calcularResumen(d) {
-  const ageMonths = numero(d.f3_edad_meses);
+function calcularResumen(d, edad) {
+  const ageMonths = edad ? edad.totalMeses : null;
   const nightSleepMin = minutos(d.q26_sueno_noche_h, d.q26_sueno_noche_m);
   const daySleepMin = minutos(d.q31_sueno_dia_h, d.q31_sueno_dia_m);
   const total24hMin = nightSleepMin + daySleepMin;
@@ -104,7 +112,20 @@ function calcularResumen(d) {
   const dificultadFlag = ["Algo difícil", "Muy difícil"].indexOf(d.q14_dificultad) !== -1;
   const percepcionFlag = ["Es un problema moderado", "Es un problema grave"].indexOf(d.q32_problema) !== -1;
 
+  // Despertares nocturnos: umbral clínico (>3/noche) solo es significativo en
+  // mayores de 1 año; por debajo de esa edad son fisiológicos con frecuencia.
+  const wakingsFlag = ageMonths !== null && ageMonths > 12 && wakings > 3;
+
+  // Ronquido frecuente (≥3 noches/semana): señal de posible trastorno
+  // respiratorio del sueño (SAHS), a cualquier edad.
+  const ronquidoFlag = d.q24_ronca === "Tres veces a la semana o más";
+
+  // Higiene de sueño: aparatos electrónicos encendidos en la habitación
+  // mientras se duerme.
+  const higieneFlag = d.q10_aparatos === "Sí";
+
   return {
+    edad,
     ageMonths,
     total24hMin,
     total24hOk,
@@ -116,13 +137,138 @@ function calcularResumen(d) {
     latencyMin,
     latencyFlag: latencyMin > 30,
     wakings,
-    wakingsFlag: wakings > 3,
+    wakingsFlag,
     naps,
     dificultad: d.q14_dificultad,
     dificultadFlag,
     percepcion: d.q32_problema,
-    percepcionFlag
+    percepcionFlag,
+    ronquido: d.q24_ronca,
+    ronquidoFlag,
+    higieneFlag
   };
+}
+
+/* ============================================================
+   Devolución orientativa (cribado, no diagnóstico)
+   Basada en: preguntas clave y umbrales de cribado general de sueño
+   infantil (más de 3 despertares/noche en > 1 año, latencia > 30 min,
+   ronquido frecuente como señal de posible trastorno respiratorio del
+   sueño a cualquier edad, higiene de sueño) — Cruz Navarro IJ.
+   Alteraciones del sueño infantil. Curso de Actualización Pediatría
+   2018. Madrid: Lúa Ediciones 3.0; 2018. p. 317-329.
+   ============================================================ */
+function agregarDevolucion(body, r) {
+  const encabezado = body.appendParagraph("Devolución orientativa");
+  encabezado.setHeading(DocumentApp.ParagraphHeading.HEADING1);
+
+  const banderas = [];
+  if (r.total24hOk === false) {
+    banderas.push(`Sueño total en 24 hs fuera del rango esperado para la edad (${r.rango.texto}).`);
+  }
+  if (r.latencyFlag) {
+    banderas.push("Tarda más de 30 minutos en dormirse (latencia de sueño elevada).");
+  }
+  if (r.wakingsFlag) {
+    banderas.push("Más de 3 despertares por noche en un niño mayor de 1 año.");
+  }
+  if (r.dificultadFlag) {
+    banderas.push(`Hora de acostarse percibida como "${r.dificultad}".`);
+  }
+  if (r.percepcionFlag) {
+    banderas.push(`La familia percibe el sueño como "${r.percepcion}".`);
+  }
+  if (r.ronquidoFlag) {
+    banderas.push("Ronquido frecuente (3 o más noches por semana).");
+  }
+  if (r.higieneFlag) {
+    banderas.push("Aparatos electrónicos encendidos en la habitación mientras se duerme.");
+  }
+
+  let patron;
+  if (r.ronquidoFlag || r.percepcion === "Es un problema grave" || r.dificultad === "Muy difícil" || banderas.length >= 3) {
+    patron = "Alterado";
+  } else if (banderas.length >= 1) {
+    patron = "Con señales a vigilar";
+  } else {
+    patron = "Dentro de lo esperado para la edad";
+  }
+
+  let derivacion;
+  if (r.ronquidoFlag) {
+    derivacion = "Sí — el ronquido frecuente (3 o más noches por semana) es indicación de evaluar un posible trastorno respiratorio del sueño (SAHS); se sugiere derivar a Otorrinolaringología o a un especialista en sueño infantil.";
+  } else if (patron === "Alterado") {
+    derivacion = "A criterio de la profesional tratante — el patrón presenta varias señales de alteración que ameritan seguimiento estrecho y podrían justificar derivación según evolución.";
+  } else {
+    derivacion = "No se identifican en este cribado señales que sugieran derivación a especialista en este momento.";
+  }
+
+  const pPatron = body.appendParagraph(`Patrón de sueño: ${patron}`);
+  pPatron.editAsText().setBold(true);
+
+  const pDerivacion = body.appendParagraph(`¿Sugiere derivación a especialista del sueño?: ${derivacion}`);
+  pDerivacion.setSpacingAfter(8);
+
+  if (banderas.length > 0) {
+    body.appendParagraph("Señales identificadas en este cribado:").editAsText().setBold(true);
+    banderas.forEach((b) => body.appendParagraph(`•  ${b}`));
+  } else {
+    body.appendParagraph("No se identificaron señales de alerta en este cribado.");
+  }
+
+  const nota = body.appendParagraph(
+    "Esta devolución es una orientación automática generada a partir de criterios de cribado general de sueño infantil (preguntas clave, umbrales de despertares/latencia, ronquido e higiene de sueño según bibliografía pediátrica) y de la percepción familiar. No constituye un diagnóstico ni reemplaza el juicio clínico de la profesional tratante, quien deberá confirmarlo con la anamnesis y evaluación correspondientes."
+  );
+  nota.editAsText().setItalic(true).setFontSize(9);
+  nota.setSpacingBefore(8);
+}
+
+/* ============================================================
+   Cálculo de edad exacta a partir de la fecha de nacimiento
+   ============================================================ */
+function calcularEdadExacta(fechaNacStr, fechaRef) {
+  if (!fechaNacStr) return null;
+  const partes = fechaNacStr.split("-").map(Number);
+  if (partes.length !== 3 || partes.some(isNaN)) return null;
+
+  const nacimiento = new Date(partes[0], partes[1] - 1, partes[2]);
+
+  let anios = fechaRef.getFullYear() - nacimiento.getFullYear();
+  let meses = fechaRef.getMonth() - nacimiento.getMonth();
+  let dias = fechaRef.getDate() - nacimiento.getDate();
+
+  if (dias < 0) {
+    meses--;
+    const ultimoDiaMesAnterior = new Date(fechaRef.getFullYear(), fechaRef.getMonth(), 0).getDate();
+    dias += ultimoDiaMesAnterior;
+  }
+  if (meses < 0) {
+    anios--;
+    meses += 12;
+  }
+
+  return { anios, meses, dias, totalMeses: anios * 12 + meses };
+}
+
+function pluralizar(n, singular, plural) {
+  return n === 1 ? singular : plural;
+}
+
+function formatearEdad(e) {
+  if (!e) return "—";
+  const m = `${e.meses} ${pluralizar(e.meses, "mes", "meses")}`;
+  const dd = `${e.dias} ${pluralizar(e.dias, "día", "días")}`;
+  if (e.anios > 0) {
+    const a = `${e.anios} ${pluralizar(e.anios, "año", "años")}`;
+    return `${a}, ${m} y ${dd}`;
+  }
+  return `${m} y ${dd}`;
+}
+
+function formatearFechaCorta(fechaStr) {
+  if (!fechaStr) return "—";
+  const [y, m, dd] = fechaStr.split("-");
+  return `${dd}-${m}-${y}`;
 }
 
 function rangoEsperado(ageMonths) {
@@ -241,11 +387,10 @@ function formatearFecha(fecha) {
 const PREGUNTAS_FAMILIA = [
   { texto: "1. ¿Cuál es su relación con su hijo/a?", campo: "f1_relacion" },
   { texto: "2. ¿Cuál es el nivel de formación más alto que ha alcanzado?", campo: "f2_formacion" },
-  { texto: "3. ¿Qué edad tiene su hijo/a (en meses)?", campo: "f3_edad_meses" },
-  { texto: "4. ¿Su hijo/a fue prematuro?", campo: "f4_prematuro" },
-  { texto: "5. Sexo biológico", campo: "f5_sexo" },
-  { texto: "6. País/región de residencia", campo: "f6_pais" },
-  { texto: "7. Noches por semana que se ocupa de su hijo/a", campo: "f7_noches_semana" }
+  { texto: "3. ¿Su hijo/a fue prematuro?", campo: "f4_prematuro" },
+  { texto: "4. Sexo biológico", campo: "f5_sexo" },
+  { texto: "5. País/región de residencia", campo: "f6_pais" },
+  { texto: "6. Noches por semana que se ocupa de su hijo/a", campo: "f7_noches_semana" }
 ];
 
 const PREGUNTAS_RUTINA = [
@@ -308,10 +453,10 @@ function pruebaManual() {
   const datosDePrueba = {
     pac_nombre: "Test",
     pac_apellido: "Prueba",
+    pac_fecha_nacimiento: "2025-11-15",
     pac_cobertura: "Particular",
     f1_relacion: "Madre",
     f2_formacion: "Facultad/universidad",
-    f3_edad_meses: "8",
     f4_prematuro: "No",
     f5_sexo: "Femenino",
     f6_pais: "Argentina",
