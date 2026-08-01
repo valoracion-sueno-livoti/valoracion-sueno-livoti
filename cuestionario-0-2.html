@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<title>Valoración del sueño del niño — Cuestionario (0 a 2 años)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@500;600;700;800&family=Nunito+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+<body>
+
+<header class="marca">
+  <img src="assets/logo.png" alt="Florencia Livoti Pediatría">
+  <div class="marca-texto">
+    <span class="app-nombre">Valoración del sueño del niño</span>
+    <span class="medico-nombre">Florencia Livoti · Pediatría</span>
+  </div>
+</header>
+
+<div class="progreso-wrap">
+  <div class="progreso-info">
+    <span id="progreso-texto">Paso 1 de 8</span>
+    <span id="progreso-nombre-seccion">Datos del paciente</span>
+  </div>
+  <div class="progreso-puntos" id="progreso-puntos"></div>
+</div>
+
+<main class="contenedor">
+  <form id="formulario" class="tarjeta" novalidate>
+
+    <!-- ===================== PASO 0 — DATOS DEL PACIENTE ===================== -->
+    <section class="paso" id="paso-0" data-color="azul">
+      <span class="seccion-eyebrow">Para empezar</span>
+      <h1 class="seccion-titulo">Datos del paciente</h1>
+      <p class="seccion-descripcion">Estos datos identifican el cuestionario en el consultorio.</p>
+
+      <div class="campo" data-tipo="texto">
+        <label class="campo-etiqueta" for="pac_nombre">Nombre del bebé</label>
+        <input type="text" id="pac_nombre" name="pac_nombre" autocomplete="off">
+        <div class="error-mensaje">Completá el nombre del bebé.</div>
+      </div>
+
+      <div class="campo" data-tipo="texto">
+        <label class="campo-etiqueta" for="pac_apellido">Apellido del bebé</label>
+        <input type="text" id="pac_apellido" name="pac_apellido" autocomplete="off">
+        <div class="error-mensaje">Completá el apellido del bebé.</div>
+      </div>
+
+      <div class="campo" data-tipo="texto">
+        <label class="campo-etiqueta" for="pac_cobertura">Cobertura médica</label>
+        <div class="campo-ayuda">Escriba el nombre de la obra social o prepaga, o "Particular" si no tiene cobertura.</div>
+        <input type="text" id="pac_cobertura" name="pac_cobertura" autocomplete="off">
+        <div class="error-mensaje">Completá la cobertura médica.</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 1 — SOBRE LA FAMILIA ===================== -->
+    <section class="paso oculto" id="paso-1" data-color="violeta">
+      <span class="seccion-eyebrow">Sección 1</span>
+      <h1 class="seccion-titulo">Sobre la familia</h1>
+      <p class="seccion-descripcion">Algunas preguntas generales antes de hablar del sueño.</p>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">1.</span>¿Cuál es su relación con su hijo/a?</label>
+        <div class="opciones" data-name="f1_relacion">
+          <div class="opcion"><input type="radio" name="f1_relacion" id="f1_madre" value="Madre"><label for="f1_madre">Madre</label></div>
+          <div class="opcion"><input type="radio" name="f1_relacion" id="f1_padre" value="Padre"><label for="f1_padre">Padre</label></div>
+          <div class="opcion"><input type="radio" name="f1_relacion" id="f1_abuelo" value="Abuelo/a"><label for="f1_abuelo">Abuelo/a</label></div>
+          <div class="opcion"><input type="radio" name="f1_relacion" id="f1_otro" value="Otro"><label for="f1_otro">Otro</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">2.</span>¿Cuál es el nivel de formación más alto que ha alcanzado?</label>
+        <div class="opciones" data-name="f2_formacion">
+          <div class="opcion"><input type="radio" name="f2_formacion" id="f2_a" value="Inferior a bachillerato/secundaria"><label for="f2_a">Inferior a bachillerato/secundaria</label></div>
+          <div class="opcion"><input type="radio" name="f2_formacion" id="f2_b" value="Bachillerato/secundaria"><label for="f2_b">Bachillerato/secundaria</label></div>
+          <div class="opcion"><input type="radio" name="f2_formacion" id="f2_c" value="Facultad/universidad"><label for="f2_c">Facultad/universidad</label></div>
+          <div class="opcion"><input type="radio" name="f2_formacion" id="f2_d" value="Posgrado"><label for="f2_d">Posgrado (p. ej. máster y doctorado)</label></div>
+          <div class="opcion"><input type="radio" name="f2_formacion" id="f2_e" value="Prefiero no contestar"><label for="f2_e">Prefiero no contestar</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="numero">
+        <label class="campo-etiqueta" for="f3_edad_meses"><span class="campo-numero">3.</span>¿Qué edad tiene su hijo/a?</label>
+        <div class="campo-ayuda">Ingrese la edad en meses (por ejemplo: 8)</div>
+        <input type="number" id="f3_edad_meses" name="f3_edad_meses" min="0" max="24" inputmode="numeric">
+        <div class="error-mensaje">Ingresá la edad en meses.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">4.</span>¿Su hijo/a fue prematuro (nació antes de las 37 semanas de gestación)?</label>
+        <div class="opciones en-linea" data-name="f4_prematuro">
+          <div class="opcion"><input type="radio" name="f4_prematuro" id="f4_si" value="Sí"><label for="f4_si">Sí</label></div>
+          <div class="opcion"><input type="radio" name="f4_prematuro" id="f4_no" value="No"><label for="f4_no">No</label></div>
+          <div class="opcion"><input type="radio" name="f4_prematuro" id="f4_nose" value="No lo sé"><label for="f4_nose">No lo sé</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">5.</span>El sexo biológico de mi hijo/a es</label>
+        <div class="opciones en-linea" data-name="f5_sexo">
+          <div class="opcion"><input type="radio" name="f5_sexo" id="f5_m" value="Masculino"><label for="f5_m">Masculino</label></div>
+          <div class="opcion"><input type="radio" name="f5_sexo" id="f5_f" value="Femenino"><label for="f5_f">Femenino</label></div>
+          <div class="opcion"><input type="radio" name="f5_sexo" id="f5_i" value="Intersexual"><label for="f5_i">Intersexual</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="texto">
+        <label class="campo-etiqueta" for="f6_pais"><span class="campo-numero">6.</span>¿En qué país/región reside actualmente?</label>
+        <div class="campo-ayuda">Ingrese el país o región donde vive (por ejemplo: Argentina)</div>
+        <input type="text" id="f6_pais" name="f6_pais" autocomplete="off">
+        <div class="error-mensaje">Completá el país o región.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">7.</span>¿Cuántas noches a la semana se ocupa de su hijo/a a la hora de acostarlo y/o durante la noche?</label>
+        <div class="opciones en-linea" data-name="f7_noches_semana">
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_0" value="0"><label for="f7_0">0</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_1" value="1"><label for="f7_1">1</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_2" value="2"><label for="f7_2">2</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_3" value="3"><label for="f7_3">3</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_4" value="4"><label for="f7_4">4</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_5" value="5"><label for="f7_5">5</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_6" value="6"><label for="f7_6">6</label></div>
+          <div class="opcion"><input type="radio" name="f7_noches_semana" id="f7_7" value="7"><label for="f7_7">7</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 2 — RUTINA PARA DORMIR ===================== -->
+    <section class="paso oculto" id="paso-2" data-color="amarillo">
+      <span class="seccion-eyebrow">Sección 2</span>
+      <h1 class="seccion-titulo">Rutina para dormir</h1>
+      <p class="seccion-descripcion">Pensando en las últimas dos semanas, contanos cómo es la rutina antes de dormir.</p>
+
+      <div class="campo" data-tipo="hora">
+        <label class="campo-etiqueta" for="q1_hora_rutina"><span class="campo-numero">1.</span>¿A qué hora suele empezar la rutina de su hijo/a a la hora de acostarse?</label>
+        <div class="campo-ayuda">Ingrese la hora en formato 24 hs (por ejemplo: 19:45)</div>
+        <input type="time" id="q1_hora_rutina" name="q1_hora_rutina">
+        <div class="error-mensaje">Ingresá la hora.</div>
+      </div>
+
+      <div class="campo" data-tipo="checkbox">
+        <label class="campo-etiqueta"><span class="campo-numero">2.</span>¿Cuál de las siguientes actividades acostumbra a realizar su hijo/a la mayoría de las noches en la hora anterior a la hora de acostarse?</label>
+        <div class="campo-ayuda">Marque todas las que correspondan</div>
+        <div class="opciones" data-name="q2_actividades" data-min="1">
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_bano" value="Baño"><label for="q2_bano">Baño</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_masaje" value="Masaje"><label for="q2_masaje">Masaje</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_leer" value="Leer / que le lean libros"><label for="q2_leer">Leer / que le lean libros</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_mecer" value="Mecerle"><label for="q2_mecer">Mecerle</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_tv" value="Ver la televisión"><label for="q2_tv">Ver la televisión</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_cenar" value="Cenar o comer un tentempié"><label for="q2_cenar">Cenar o comer un tentempié</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_biberon" value="Tomar el biberón, una bebida o el pecho"><label for="q2_biberon">Tomar el biberón, una bebida o el pecho</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_correr" value="Corretear"><label for="q2_correr">Corretear</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_dientes" value="Lavarse los dientes"><label for="q2_dientes">Lavarse los dientes</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_jugar" value="Jugar"><label for="q2_jugar">Jugar</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_abrazar" value="Abrazarle"><label for="q2_abrazar">Abrazarle</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_rezar" value="Rezar"><label for="q2_rezar">Rezar</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_cantar" value="Cantar canciones"><label for="q2_cantar">Cantar canciones</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_musica" value="Escuchar música"><label for="q2_musica">Escuchar música</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_pantalla" value="Usar o ver un teléfono inteligente, tableta u otro dispositivo electrónico"><label for="q2_pantalla">Usar o ver un teléfono inteligente, tableta u otro dispositivo electrónico</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q2_actividades" id="q2_otros" value="Otros"><label for="q2_otros">Otros</label></div>
+        </div>
+        <div class="error-mensaje">Marcá al menos una actividad.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">3.</span>En una semana normal, ¿con qué frecuencia tiene su hijo/a exactamente la misma rutina a la hora de acostarse?</label>
+        <div class="campo-ayuda">Cantidad de noches sobre 7</div>
+        <div class="opciones en-linea" data-name="q3_frecuencia_rutina">
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_0" value="0"><label for="q3_0">0</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_1" value="1"><label for="q3_1">1</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_2" value="2"><label for="q3_2">2</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_3" value="3"><label for="q3_3">3</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_4" value="4"><label for="q3_4">4</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_5" value="5"><label for="q3_5">5</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_6" value="6"><label for="q3_6">6</label></div>
+          <div class="opcion"><input type="radio" name="q3_frecuencia_rutina" id="q3_7" value="7"><label for="q3_7">7</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">4.</span>Como parte de la rutina de su hijo/a a la hora de acostarse, ¿suele darle el pecho o leche materna?</label>
+        <div class="opciones en-linea" data-name="q4_pecho_rutina">
+          <div class="opcion"><input type="radio" name="q4_pecho_rutina" id="q4_si" value="Sí"><label for="q4_si">Sí</label></div>
+          <div class="opcion"><input type="radio" name="q4_pecho_rutina" id="q4_no" value="No"><label for="q4_no">No</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 3 — DÓNDE Y CÓMO DUERME ===================== -->
+    <section class="paso oculto" id="paso-3" data-color="naranja">
+      <span class="seccion-eyebrow">Sección 3</span>
+      <h1 class="seccion-titulo">Dónde y cómo se duerme</h1>
+      <p class="seccion-descripcion">Sobre el momento en que su hijo/a se queda dormido/a por la noche.</p>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">5.</span>¿En qué habitación suele dormirse su hijo/a por la noche?</label>
+        <div class="opciones" data-name="q5_habitacion_noche">
+          <div class="opcion"><input type="radio" name="q5_habitacion_noche" id="q5_a" value="En su dormitorio"><label for="q5_a">En su dormitorio</label></div>
+          <div class="opcion"><input type="radio" name="q5_habitacion_noche" id="q5_b" value="En el dormitorio de sus padres"><label for="q5_b">En el dormitorio de sus padres</label></div>
+          <div class="opcion"><input type="radio" name="q5_habitacion_noche" id="q5_c" value="En el dormitorio de un hermano u otro dormitorio"><label for="q5_c">En el dormitorio de un hermano u otro dormitorio</label></div>
+          <div class="opcion"><input type="radio" name="q5_habitacion_noche" id="q5_d" value="En otra habitación de la casa"><label for="q5_d">En otra habitación de la casa</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">6.</span>¿Dónde suele dormirse su hijo/a por la noche?</label>
+        <div class="opciones" data-name="q6_lugar_dormir_noche">
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_a" value="Cuna"><label for="q6_a">Cuna</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_b" value="Cama propia (de cualquier tamaño)"><label for="q6_b">Cama propia (de cualquier tamaño)</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_c" value="Cama de los padres"><label for="q6_c">Cama de los padres</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_d" value="Cuna de colecho (unida a la cama de los padres)"><label for="q6_d">Cuna de colecho (unida a la cama de los padres)</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_e" value="Moisés/silla infantil"><label for="q6_e">Moisés/silla infantil</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_f" value="Columpio/cochecito"><label for="q6_f">Columpio/cochecito</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_g" value="Brazos de los padres/del adulto"><label for="q6_g">Brazos de los padres/del adulto</label></div>
+          <div class="opcion"><input type="radio" name="q6_lugar_dormir_noche" id="q6_h" value="Otros"><label for="q6_h">Otros</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">7.</span>¿Cómo suele dormirse su hijo/a por la noche?</label>
+        <div class="opciones" data-name="q7_como_se_duerme">
+          <div class="opcion"><input type="radio" name="q7_como_se_duerme" id="q7_a" value="En brazos o acunándole"><label for="q7_a">En brazos o acunándole</label></div>
+          <div class="opcion"><input type="radio" name="q7_como_se_duerme" id="q7_b" value="Con un adulto en la habitación, pero sin que lo cojan en brazos o lo acunen"><label for="q7_b">Con un adulto en la habitación, pero sin que lo cojan en brazos o lo acunen</label></div>
+          <div class="opcion"><input type="radio" name="q7_como_se_duerme" id="q7_c" value="Solo (sin un adulto en la habitación)"><label for="q7_c">Solo (sin un adulto en la habitación)</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">8.</span>A la hora de acostarse, ¿suele dormirse su hijo/a mientras le da el pecho, el biberón o bebe de una taza antiderrame?</label>
+        <div class="opciones en-linea" data-name="q8_duerme_comiendo">
+          <div class="opcion"><input type="radio" name="q8_duerme_comiendo" id="q8_si" value="Sí"><label for="q8_si">Sí</label></div>
+          <div class="opcion"><input type="radio" name="q8_duerme_comiendo" id="q8_no" value="No"><label for="q8_no">No</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">9.</span>¿Suele su hijo/a dormirse por la noche con un chupete?</label>
+        <div class="opciones en-linea" data-name="q9_chupete">
+          <div class="opcion"><input type="radio" name="q9_chupete" id="q9_si" value="Sí"><label for="q9_si">Sí</label></div>
+          <div class="opcion"><input type="radio" name="q9_chupete" id="q9_no" value="No"><label for="q9_no">No</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">10.</span>¿Suele haber aparatos electrónicos (TV, teléfonos, tabletas) encendidos en la habitación mientras su hijo/a se duerme por la noche?</label>
+        <div class="opciones en-linea" data-name="q10_aparatos">
+          <div class="opcion"><input type="radio" name="q10_aparatos" id="q10_si" value="Sí"><label for="q10_si">Sí</label></div>
+          <div class="opcion"><input type="radio" name="q10_aparatos" id="q10_no" value="No"><label for="q10_no">No</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">11.</span>¿Quién acuesta a su hijo/a por la noche?</label>
+        <div class="opciones" data-name="q11_quien_acuesta">
+          <div class="opcion"><input type="radio" name="q11_quien_acuesta" id="q11_a" value="Únicamente la madre"><label for="q11_a">Únicamente la madre</label></div>
+          <div class="opcion"><input type="radio" name="q11_quien_acuesta" id="q11_b" value="Generalmente la madre"><label for="q11_b">Generalmente la madre</label></div>
+          <div class="opcion"><input type="radio" name="q11_quien_acuesta" id="q11_c" value="Los dos padres por igual"><label for="q11_c">Los dos padres por igual</label></div>
+          <div class="opcion"><input type="radio" name="q11_quien_acuesta" id="q11_d" value="Normalmente el padre/pareja"><label for="q11_d">Normalmente el padre/pareja</label></div>
+          <div class="opcion"><input type="radio" name="q11_quien_acuesta" id="q11_e" value="Únicamente el padre/pareja"><label for="q11_e">Únicamente el padre/pareja</label></div>
+          <div class="opcion"><input type="radio" name="q11_quien_acuesta" id="q11_f" value="Normalmente otra persona"><label for="q11_f">Normalmente otra persona</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 4 — HORA DE ACOSTARSE ===================== -->
+    <section class="paso oculto" id="paso-4" data-color="verde">
+      <span class="seccion-eyebrow">Sección 4</span>
+      <h1 class="seccion-titulo">La hora de acostarse</h1>
+      <p class="seccion-descripcion">Sobre el momento puntual de ir a la cama.</p>
+
+      <div class="campo" data-tipo="hora">
+        <label class="campo-etiqueta" for="q12_hora_acostarse"><span class="campo-numero">12.</span>¿A qué hora suele acostar a su hijo/a por la noche (apagar las luces)?</label>
+        <div class="campo-ayuda">Ingrese la hora en formato 24 hs (por ejemplo: 20:30)</div>
+        <input type="time" id="q12_hora_acostarse" name="q12_hora_acostarse">
+        <div class="error-mensaje">Ingresá la hora.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">13.</span>En una semana normal, ¿con qué frecuencia se acuesta su hijo/a a la misma hora (con un margen de 15 minutos)?</label>
+        <div class="campo-ayuda">Cantidad de noches sobre 7</div>
+        <div class="opciones en-linea" data-name="q13_frecuencia_hora">
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_0" value="0"><label for="q13_0">0</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_1" value="1"><label for="q13_1">1</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_2" value="2"><label for="q13_2">2</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_3" value="3"><label for="q13_3">3</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_4" value="4"><label for="q13_4">4</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_5" value="5"><label for="q13_5">5</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_6" value="6"><label for="q13_6">6</label></div>
+          <div class="opcion"><input type="radio" name="q13_frecuencia_hora" id="q13_7" value="7"><label for="q13_7">7</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">14.</span>Por lo general, ¿cómo de difícil es la hora de acostarse?</label>
+        <div class="opciones" data-name="q14_dificultad">
+          <div class="opcion"><input type="radio" name="q14_dificultad" id="q14_a" value="Muy fácil"><label for="q14_a">Muy fácil</label></div>
+          <div class="opcion"><input type="radio" name="q14_dificultad" id="q14_b" value="Algo fácil"><label for="q14_b">Algo fácil</label></div>
+          <div class="opcion"><input type="radio" name="q14_dificultad" id="q14_c" value="Ni fácil ni difícil"><label for="q14_c">Ni fácil ni difícil</label></div>
+          <div class="opcion"><input type="radio" name="q14_dificultad" id="q14_d" value="Algo difícil"><label for="q14_d">Algo difícil</label></div>
+          <div class="opcion"><input type="radio" name="q14_dificultad" id="q14_e" value="Muy difícil"><label for="q14_e">Muy difícil</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="duracion">
+        <label class="campo-etiqueta"><span class="campo-numero">15.</span>¿Cuánto tiempo suele tardar su hijo/a en dormirse?</label>
+        <div class="campo-ayuda">Ejemplo: si lo acuesta a las 20:30 y se duerme a las 21:00, tarda 30 minutos.</div>
+        <div class="duo">
+          <div class="duo-item"><label for="q15_latencia_h">Horas</label><input type="number" id="q15_latencia_h" name="q15_latencia_h" min="0" max="12" inputmode="numeric"></div>
+          <div class="duo-item"><label for="q15_latencia_m">Minutos</label><input type="number" id="q15_latencia_m" name="q15_latencia_m" min="0" max="59" inputmode="numeric"></div>
+        </div>
+        <div class="error-mensaje">Completá horas y minutos (pueden ser 0).</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 5 — DURANTE LA NOCHE ===================== -->
+    <section class="paso oculto" id="paso-5" data-color="azul">
+      <span class="seccion-eyebrow">Sección 5</span>
+      <h1 class="seccion-titulo">Durante la noche</h1>
+      <p class="seccion-descripcion">Sobre dónde duerme y qué pasa si se despierta durante la noche.</p>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">16.</span>¿En qué habitación duerme su hijo/a la mayor parte de la noche?</label>
+        <div class="opciones" data-name="q16_habitacion_mayor_noche">
+          <div class="opcion"><input type="radio" name="q16_habitacion_mayor_noche" id="q16_a" value="En su dormitorio"><label for="q16_a">En su dormitorio</label></div>
+          <div class="opcion"><input type="radio" name="q16_habitacion_mayor_noche" id="q16_b" value="En el dormitorio de los padres"><label for="q16_b">En el dormitorio de los padres</label></div>
+          <div class="opcion"><input type="radio" name="q16_habitacion_mayor_noche" id="q16_c" value="En el dormitorio de un hermano u otro dormitorio"><label for="q16_c">En el dormitorio de un hermano u otro dormitorio</label></div>
+          <div class="opcion"><input type="radio" name="q16_habitacion_mayor_noche" id="q16_d" value="En otra habitación de la casa"><label for="q16_d">En otra habitación de la casa</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">17.</span>¿Dónde duerme su hijo/a la mayor parte de la noche?</label>
+        <div class="opciones" data-name="q17_lugar_mayor_noche">
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_a" value="Cuna"><label for="q17_a">Cuna</label></div>
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_b" value="Cama propia (cualquier tamaño)"><label for="q17_b">Cama propia (cualquier tamaño)</label></div>
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_c" value="Cama de los padres"><label for="q17_c">Cama de los padres</label></div>
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_d" value="Cuna de colecho (unida a la cama de los padres)"><label for="q17_d">Cuna de colecho (unida a la cama de los padres)</label></div>
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_e" value="Moisés/silla infantil"><label for="q17_e">Moisés/silla infantil</label></div>
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_f" value="Columpio/cochecito"><label for="q17_f">Columpio/cochecito</label></div>
+          <div class="opcion"><input type="radio" name="q17_lugar_mayor_noche" id="q17_g" value="Otro"><label for="q17_g">Otro</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">18.</span>¿En qué posición duerme su hijo/a la mayor parte del tiempo?</label>
+        <div class="opciones en-linea" data-name="q18_posicion">
+          <div class="opcion"><input type="radio" name="q18_posicion" id="q18_a" value="Boca abajo"><label for="q18_a">Boca abajo</label></div>
+          <div class="opcion"><input type="radio" name="q18_posicion" id="q18_b" value="De lado"><label for="q18_b">De lado</label></div>
+          <div class="opcion"><input type="radio" name="q18_posicion" id="q18_c" value="Boca arriba"><label for="q18_c">Boca arriba</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="numero">
+        <label class="campo-etiqueta" for="q19_veces_despierta"><span class="campo-numero">19.</span>¿Cuántas veces suele despertarse su hijo/a durante la noche?</label>
+        <div class="campo-ayuda">Ingrese un número de veces por noche (por ejemplo: 2)</div>
+        <input type="number" id="q19_veces_despierta" name="q19_veces_despierta" min="0" max="20" inputmode="numeric">
+        <div class="error-mensaje">Ingresá un número (puede ser 0).</div>
+      </div>
+
+      <div class="campo" data-tipo="checkbox">
+        <label class="campo-etiqueta"><span class="campo-numero">20.</span>Cuando su hijo/a se despierta durante la noche, ¿qué suele hacer?</label>
+        <div class="campo-ayuda">Marque todas las que correspondan</div>
+        <div class="opciones" data-name="q20_que_hace" data-min="1">
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_a" value="Levantar a mi hijo/a y cogerlo/acunarlo hasta que se duerme"><label for="q20_a">Levantar a mi hijo/a y cogerlo/acunarlo hasta que se duerme</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_b" value="Levantar a mi hijo/a y volver a acostarlo mientras está despierto"><label for="q20_b">Levantar a mi hijo/a y volver a acostarlo mientras está despierto</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_c" value="Acariciar o dar palmaditas a mi hijo/a pero no levantarlo ni sacarlo de la cuna/cama"><label for="q20_c">Acariciar o dar palmaditas a mi hijo/a pero no levantarlo ni sacarlo de la cuna/cama</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_d" value="Acostarme junto a mi hijo/a en su habitación/cama"><label for="q20_d">Acostarme junto a mi hijo/a en su habitación/cama</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_e" value="Darle el biberón o una taza antiderrame para que se vuelva a dormir"><label for="q20_e">Darle el biberón o una taza antiderrame para que se vuelva a dormir</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_f" value="Darle el pecho/amamantarle para que se vuelva a dormir"><label for="q20_f">Darle el pecho/amamantarle para que se vuelva a dormir</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_g" value="Darle un chupete"><label for="q20_g">Darle un chupete</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_h" value="Cambiarle el pañal"><label for="q20_h">Cambiarle el pañal</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_i" value="Consolarlo verbalmente pero no cogerlo en brazos ni sacarlo de la cuna/cama"><label for="q20_i">Consolarlo verbalmente pero no cogerlo en brazos ni sacarlo de la cuna/cama</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_j" value="Llevarlo a mi cama"><label for="q20_j">Llevarlo a mi cama</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_k" value="Dejar que llore y se vuelva a dormir solo"><label for="q20_k">Dejar que llore y se vuelva a dormir solo</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_l" value="Darle unos minutos para ver si se vuelve a dormir"><label for="q20_l">Darle unos minutos para ver si se vuelve a dormir</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_m" value="Jugar con mi hijo/a, ver la televisión o usar/ver un teléfono/tableta"><label for="q20_m">Jugar con mi hijo/a, ver la televisión o usar/ver un teléfono/tableta</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_n" value="Cantarle"><label for="q20_n">Cantarle</label></div>
+          <div class="opcion opcion-check"><input type="checkbox" name="q20_que_hace" id="q20_o" value="Ninguna de ellas"><label for="q20_o">Ninguna de ellas</label></div>
+        </div>
+        <div class="error-mensaje">Marcá al menos una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">21.</span>¿Quién se encarga de su hijo/a cuando se despierta durante la noche?</label>
+        <div class="opciones" data-name="q21_quien_encarga">
+          <div class="opcion"><input type="radio" name="q21_quien_encarga" id="q21_a" value="Únicamente la madre"><label for="q21_a">Únicamente la madre</label></div>
+          <div class="opcion"><input type="radio" name="q21_quien_encarga" id="q21_b" value="Generalmente la madre"><label for="q21_b">Generalmente la madre</label></div>
+          <div class="opcion"><input type="radio" name="q21_quien_encarga" id="q21_c" value="Los dos padres por igual"><label for="q21_c">Los dos padres por igual</label></div>
+          <div class="opcion"><input type="radio" name="q21_quien_encarga" id="q21_d" value="Normalmente el padre/pareja"><label for="q21_d">Normalmente el padre/pareja</label></div>
+          <div class="opcion"><input type="radio" name="q21_quien_encarga" id="q21_e" value="Únicamente el padre/pareja"><label for="q21_e">Únicamente el padre/pareja</label></div>
+          <div class="opcion"><input type="radio" name="q21_quien_encarga" id="q21_f" value="Normalmente otra persona"><label for="q21_f">Normalmente otra persona</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="duracion">
+        <label class="campo-etiqueta"><span class="campo-numero">22.</span>¿Cuánto tiempo suele estar su hijo/a despierto/a en total durante la NOCHE?</label>
+        <div class="campo-ayuda">Desde que se acuesta hasta que se despierta por la mañana. Ejemplo: si se despierta 2 veces y está despierto 15 minutos cada vez, el total es 0 horas 30 minutos.</div>
+        <div class="duo">
+          <div class="duo-item"><label for="q22_despierto_h">Horas</label><input type="number" id="q22_despierto_h" name="q22_despierto_h" min="0" max="12" inputmode="numeric"></div>
+          <div class="duo-item"><label for="q22_despierto_m">Minutos</label><input type="number" id="q22_despierto_m" name="q22_despierto_m" min="0" max="59" inputmode="numeric"></div>
+        </div>
+        <div class="error-mensaje">Completá horas y minutos (pueden ser 0).</div>
+      </div>
+
+      <div class="campo" data-tipo="duracion">
+        <label class="campo-etiqueta"><span class="campo-numero">23.</span>¿Cuál es el mayor período de tiempo que su hijo/a está dormido/a durante la NOCHE sin despertarse?</label>
+        <div class="duo">
+          <div class="duo-item"><label for="q23_periodo_h">Horas</label><input type="number" id="q23_periodo_h" name="q23_periodo_h" min="0" max="14" inputmode="numeric"></div>
+          <div class="duo-item"><label for="q23_periodo_m">Minutos</label><input type="number" id="q23_periodo_m" name="q23_periodo_m" min="0" max="59" inputmode="numeric"></div>
+        </div>
+        <div class="error-mensaje">Completá horas y minutos (pueden ser 0).</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 6 — RONQUIDOS Y DESPERTAR MATUTINO ===================== -->
+    <section class="paso oculto" id="paso-6" data-color="violeta">
+      <span class="seccion-eyebrow">Sección 6</span>
+      <h1 class="seccion-titulo">Ronquidos y despertar matutino</h1>
+      <p class="seccion-descripcion">Sobre cómo respira mientras duerme y cómo empieza el día.</p>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">24.</span>¿Su hijo/a ronca mientras duerme?</label>
+        <div class="opciones" data-name="q24_ronca">
+          <div class="opcion"><input type="radio" name="q24_ronca" id="q24_a" value="Nunca (o solo cuando está enfermo o resfriado)"><label for="q24_a">Nunca (o solo cuando está enfermo o resfriado)</label></div>
+          <div class="opcion"><input type="radio" name="q24_ronca" id="q24_b" value="Solo ocasionalmente"><label for="q24_b">Solo ocasionalmente</label></div>
+          <div class="opcion"><input type="radio" name="q24_ronca" id="q24_c" value="Menos de tres veces a la semana"><label for="q24_c">Menos de tres veces a la semana</label></div>
+          <div class="opcion"><input type="radio" name="q24_ronca" id="q24_d" value="Tres veces a la semana o más"><label for="q24_d">Tres veces a la semana o más</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="hora">
+        <label class="campo-etiqueta" for="q25_hora_despierta"><span class="campo-numero">25.</span>¿A qué hora se despierta su hijo/a por la mañana?</label>
+        <div class="campo-ayuda">Ingrese la hora en formato 24 hs (por ejemplo: 07:15)</div>
+        <input type="time" id="q25_hora_despierta" name="q25_hora_despierta">
+        <div class="error-mensaje">Ingresá la hora.</div>
+      </div>
+
+      <div class="campo" data-tipo="duracion">
+        <label class="campo-etiqueta"><span class="campo-numero">26.</span>¿Cuánto tiempo duerme su hijo/a en total durante la NOCHE?</label>
+        <div class="campo-ayuda">Desde que se acuesta a la noche hasta que se despierta a la mañana, sumando todo el tiempo dormido.</div>
+        <div class="duo">
+          <div class="duo-item"><label for="q26_sueno_noche_h">Horas</label><input type="number" id="q26_sueno_noche_h" name="q26_sueno_noche_h" min="0" max="16" inputmode="numeric"></div>
+          <div class="duo-item"><label for="q26_sueno_noche_m">Minutos</label><input type="number" id="q26_sueno_noche_m" name="q26_sueno_noche_m" min="0" max="59" inputmode="numeric"></div>
+        </div>
+        <div class="error-mensaje">Completá horas y minutos (pueden ser 0).</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">27.</span>¿Dónde suele despertarse su hijo/a por la mañana?</label>
+        <div class="opciones" data-name="q27_lugar_despierta">
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_a" value="Cuna"><label for="q27_a">Cuna</label></div>
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_b" value="Cama propia (de cualquier tamaño)"><label for="q27_b">Cama propia (de cualquier tamaño)</label></div>
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_c" value="Cama de los padres"><label for="q27_c">Cama de los padres</label></div>
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_d" value="Cuna de colecho (unida a la cama de los padres)"><label for="q27_d">Cuna de colecho (unida a la cama de los padres)</label></div>
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_e" value="Moisés/silla infantil"><label for="q27_e">Moisés/silla infantil</label></div>
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_f" value="Columpio/cochecito"><label for="q27_f">Columpio/cochecito</label></div>
+          <div class="opcion"><input type="radio" name="q27_lugar_despierta" id="q27_g" value="Otro"><label for="q27_g">Otro</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">28.</span>¿Cómo suele dormir su hijo/a por la noche?</label>
+        <div class="opciones" data-name="q28_calidad_noche">
+          <div class="opcion"><input type="radio" name="q28_calidad_noche" id="q28_a" value="Muy bien"><label for="q28_a">Muy bien</label></div>
+          <div class="opcion"><input type="radio" name="q28_calidad_noche" id="q28_b" value="Bien"><label for="q28_b">Bien</label></div>
+          <div class="opcion"><input type="radio" name="q28_calidad_noche" id="q28_c" value="Bastante bien"><label for="q28_c">Bastante bien</label></div>
+          <div class="opcion"><input type="radio" name="q28_calidad_noche" id="q28_d" value="Mal"><label for="q28_d">Mal</label></div>
+          <div class="opcion"><input type="radio" name="q28_calidad_noche" id="q28_e" value="Muy mal"><label for="q28_e">Muy mal</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">29.</span>¿Cómo calificaría el estado de ánimo de su hijo/a cuando se despierta por la mañana?</label>
+        <div class="opciones" data-name="q29_animo">
+          <div class="opcion"><input type="radio" name="q29_animo" id="q29_a" value="Muy contento"><label for="q29_a">Muy contento</label></div>
+          <div class="opcion"><input type="radio" name="q29_animo" id="q29_b" value="Algo contento"><label for="q29_b">Algo contento</label></div>
+          <div class="opcion"><input type="radio" name="q29_animo" id="q29_c" value="Neutral"><label for="q29_c">Neutral</label></div>
+          <div class="opcion"><input type="radio" name="q29_animo" id="q29_d" value="Algo irritable"><label for="q29_d">Algo irritable</label></div>
+          <div class="opcion"><input type="radio" name="q29_animo" id="q29_e" value="Muy irritable"><label for="q29_e">Muy irritable</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+    </section>
+
+    <!-- ===================== PASO 7 — SIESTAS Y PERCEPCIÓN GENERAL ===================== -->
+    <section class="paso oculto" id="paso-7" data-color="amarillo">
+      <span class="seccion-eyebrow">Sección 7 · Última sección</span>
+      <h1 class="seccion-titulo">Siestas y percepción general</h1>
+      <p class="seccion-descripcion">Ya casi terminamos. Últimas preguntas sobre el día y cómo lo viven ustedes.</p>
+
+      <div class="campo" data-tipo="numero">
+        <label class="campo-etiqueta" for="q30_num_siestas"><span class="campo-numero">30.</span>En un DÍA normal, ¿cuántas siestas hace su hijo/a?</label>
+        <div class="campo-ayuda">Desde que se despierta por la mañana hasta que se acuesta por la noche. Ingrese un número (por ejemplo: 2)</div>
+        <input type="number" id="q30_num_siestas" name="q30_num_siestas" min="0" max="10" inputmode="numeric">
+        <div class="error-mensaje">Ingresá un número (puede ser 0).</div>
+      </div>
+
+      <div class="campo" data-tipo="duracion">
+        <label class="campo-etiqueta"><span class="campo-numero">31.</span>¿Cuánto tiempo duerme en total su hijo/a durante el DÍA?</label>
+        <div class="campo-ayuda">Ejemplo: si duerme dos siestas de una hora cada una, el total es 2 horas.</div>
+        <div class="duo">
+          <div class="duo-item"><label for="q31_sueno_dia_h">Horas</label><input type="number" id="q31_sueno_dia_h" name="q31_sueno_dia_h" min="0" max="10" inputmode="numeric"></div>
+          <div class="duo-item"><label for="q31_sueno_dia_m">Minutos</label><input type="number" id="q31_sueno_dia_m" name="q31_sueno_dia_m" min="0" max="59" inputmode="numeric"></div>
+        </div>
+        <div class="error-mensaje">Completá horas y minutos (pueden ser 0).</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">32.</span>¿Considera que el sueño de su hijo/a es un problema?</label>
+        <div class="opciones" data-name="q32_problema">
+          <div class="opcion"><input type="radio" name="q32_problema" id="q32_a" value="No es ningún problema"><label for="q32_a">No es ningún problema</label></div>
+          <div class="opcion"><input type="radio" name="q32_problema" id="q32_b" value="Es un problema muy pequeño"><label for="q32_b">Es un problema muy pequeño</label></div>
+          <div class="opcion"><input type="radio" name="q32_problema" id="q32_c" value="Es un problema pequeño"><label for="q32_c">Es un problema pequeño</label></div>
+          <div class="opcion"><input type="radio" name="q32_problema" id="q32_d" value="Es un problema moderado"><label for="q32_d">Es un problema moderado</label></div>
+          <div class="opcion"><input type="radio" name="q32_problema" id="q32_e" value="Es un problema grave"><label for="q32_e">Es un problema grave</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+
+      <div class="campo" data-tipo="radio">
+        <label class="campo-etiqueta"><span class="campo-numero">33.</span>¿Cómo de seguro se siente respecto a la gestión del sueño de su hijo/a?</label>
+        <div class="opciones" data-name="q33_seguridad">
+          <div class="opcion"><input type="radio" name="q33_seguridad" id="q33_a" value="Muy seguro"><label for="q33_a">Muy seguro</label></div>
+          <div class="opcion"><input type="radio" name="q33_seguridad" id="q33_b" value="Algo seguro"><label for="q33_b">Algo seguro</label></div>
+          <div class="opcion"><input type="radio" name="q33_seguridad" id="q33_c" value="Neutral"><label for="q33_c">Neutral</label></div>
+          <div class="opcion"><input type="radio" name="q33_seguridad" id="q33_d" value="Algo inseguro"><label for="q33_d">Algo inseguro</label></div>
+          <div class="opcion"><input type="radio" name="q33_seguridad" id="q33_e" value="Muy inseguro"><label for="q33_e">Muy inseguro</label></div>
+        </div>
+        <div class="error-mensaje">Elegí una opción.</div>
+      </div>
+    </section>
+
+    <!-- ===================== PANTALLA FINAL ===================== -->
+    <section class="paso oculto pantalla-final" id="paso-final">
+      <svg class="icono" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="39" cy="39" r="37" stroke="#6FA864" stroke-width="4" fill="#EEF5EC"/>
+        <path d="M24 40 L34 50 L55 27" stroke="#6FA864" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <h1>¡Gracias, recibimos el cuestionario!</h1>
+      <p>La Dra. Livoti va a revisar las respuestas antes de la consulta. Ya podés cerrar esta página.</p>
+    </section>
+
+    <section class="paso oculto pantalla-final" id="paso-error">
+      <svg class="icono" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="39" cy="39" r="37" stroke="#E27848" stroke-width="4" fill="#FBEBE3"/>
+        <path d="M39 24 L39 44" stroke="#E27848" stroke-width="5" stroke-linecap="round"/>
+        <circle cx="39" cy="53" r="3" fill="#E27848"/>
+      </svg>
+      <h1>No pudimos enviar el cuestionario</h1>
+      <p>Revisá tu conexión a internet e intentá de nuevo. Si el problema persiste, avisale a la Dra. Livoti.</p>
+      <button type="button" class="btn btn-primario" id="btn-reintentar" style="margin-top:14px;">Reintentar envío</button>
+    </section>
+
+    <section class="paso oculto pantalla-final" id="paso-enviando">
+      <svg class="icono" viewBox="0 0 78 78" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="39" cy="39" r="34" stroke="#EAF1F6" stroke-width="8"/>
+        <path d="M39 5 a34 34 0 0 1 0 68" stroke="#5E94BA" stroke-width="8" stroke-linecap="round">
+          <animateTransform attributeName="transform" type="rotate" from="0 39 39" to="360 39 39" dur="0.9s" repeatCount="indefinite"/>
+        </path>
+      </svg>
+      <h1>Enviando…</h1>
+      <p>Un momento, estamos guardando las respuestas.</p>
+    </section>
+
+    <div class="fila-botones">
+      <button type="button" class="btn btn-secundario oculto" id="btn-atras">Atrás</button>
+      <button type="button" class="btn btn-primario btn-ancho" id="btn-siguiente">Siguiente</button>
+    </div>
+
+  </form>
+</main>
+
+<p class="pie-app">Florencia Livoti Pediatría · Posgrado en Adolescencia y Pubertad — UBA</p>
+
+<script src="assets/app.js"></script>
+</body>
+</html>

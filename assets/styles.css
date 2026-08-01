@@ -1,0 +1,512 @@
+/* =========================================================
+   Valoración del sueño del niño — Florencia Livoti Pediatría
+   Paleta derivada del isologo (árbol + rompecabezas)
+   ========================================================= */
+
+:root {
+  /* Colores de marca (extraídos del logo) */
+  --azul: #5E94BA;
+  --violeta: #96639B;
+  --amarillo: #E9BC3B;
+  --naranja: #E27848;
+  --verde: #6FA864;
+  --marron: #8B6F52;
+
+  --azul-suave: #EAF1F6;
+  --violeta-suave: #F2EBF3;
+  --amarillo-suave: #FCF4DF;
+  --naranja-suave: #FBEBE3;
+  --verde-suave: #EBF3E9;
+
+  /* Neutros */
+  --tinta: #38332D;
+  --tinta-suave: #6B655C;
+  --papel: #FAF9F6;
+  --tarjeta: #FFFFFF;
+  --borde: #E7E2D9;
+  --borde-fuerte: #D4CDBF;
+
+  --exito: #6FA864;
+  --alerta: #D9822B;
+  --alerta-bg: #FCF1E3;
+  --exito-bg: #EEF5EC;
+
+  /* Tipografía */
+  --fuente-display: 'Baloo 2', 'Quicksand', system-ui, sans-serif;
+  --fuente-texto: 'Nunito Sans', 'Segoe UI', system-ui, sans-serif;
+
+  /* Layout */
+  --radio: 16px;
+  --radio-chico: 10px;
+  --sombra: 0 2px 10px rgba(56, 51, 45, 0.06);
+  --sombra-flotante: 0 8px 28px rgba(56, 51, 45, 0.14);
+  --ancho-maximo: 640px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--fuente-texto);
+  background: var(--papel);
+  color: var(--tinta);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+/* Textura de fondo muy sutil, hoja de papel cálido */
+body {
+  background-image:
+    radial-gradient(circle at 12% 8%, rgba(94,148,186,0.05), transparent 40%),
+    radial-gradient(circle at 90% 92%, rgba(111,168,100,0.05), transparent 40%);
+  background-attachment: fixed;
+}
+
+h1, h2, h3 {
+  font-family: var(--fuente-display);
+  font-weight: 600;
+  color: var(--tinta);
+  margin: 0 0 8px;
+}
+
+p { margin: 0 0 12px; }
+
+a { color: var(--azul); }
+
+button { font-family: inherit; }
+
+/* ---------- Encabezado con logo, presente siempre ---------- */
+
+.marca {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 18px 20px;
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+}
+
+.marca img {
+  height: 46px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.marca-texto {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.marca-texto .app-nombre {
+  font-family: var(--fuente-display);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--tinta);
+}
+
+.marca-texto .medico-nombre {
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+}
+
+/* ---------- Contenedor general ---------- */
+
+.contenedor {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 0 20px 48px;
+}
+
+.tarjeta {
+  background: var(--tarjeta);
+  border: 1px solid var(--borde);
+  border-radius: var(--radio);
+  box-shadow: var(--sombra);
+  padding: 28px 24px;
+}
+
+/* ---------- Botones ---------- */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: none;
+  border-radius: 999px;
+  padding: 14px 28px;
+  font-size: 16px;
+  font-weight: 700;
+  font-family: var(--fuente-display);
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+  text-decoration: none;
+}
+
+.btn:active { transform: scale(0.97); }
+
+.btn-primario {
+  background: var(--azul);
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(94,148,186,0.35);
+}
+.btn-primario:hover { background: #4f83a8; }
+.btn-primario:disabled {
+  background: var(--borde-fuerte);
+  box-shadow: none;
+  cursor: not-allowed;
+}
+
+.btn-secundario {
+  background: transparent;
+  color: var(--tinta-suave);
+  border: 1.5px solid var(--borde-fuerte);
+}
+.btn-secundario:hover { border-color: var(--tinta-suave); }
+
+.btn-ancho { width: 100%; }
+
+.fila-botones {
+  display: flex;
+  gap: 12px;
+  margin-top: 28px;
+}
+.fila-botones .btn { flex: 1; }
+
+/* ---------- Formularios ---------- */
+
+.campo { margin-bottom: 26px; }
+
+.campo-etiqueta {
+  display: block;
+  font-weight: 700;
+  font-size: 15.5px;
+  margin-bottom: 4px;
+  color: var(--tinta);
+}
+
+.campo-numero {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--tinta-suave);
+  margin-right: 4px;
+}
+
+.campo-ayuda {
+  font-size: 13px;
+  color: var(--tinta-suave);
+  margin-bottom: 10px;
+  font-style: italic;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="time"] {
+  width: 100%;
+  font-family: inherit;
+  font-size: 16px;
+  padding: 12px 14px;
+  border: 1.5px solid var(--borde-fuerte);
+  border-radius: var(--radio-chico);
+  background: #fff;
+  color: var(--tinta);
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+input:focus {
+  border-color: var(--azul);
+  box-shadow: 0 0 0 3px rgba(94,148,186,0.18);
+}
+
+input.campo-invalido {
+  border-color: var(--naranja);
+  box-shadow: 0 0 0 3px rgba(226,120,72,0.15);
+}
+
+.duo {
+  display: flex;
+  gap: 12px;
+}
+
+.duo-item { flex: 1; }
+
+.duo-item label {
+  display: block;
+  font-size: 12.5px;
+  color: var(--tinta-suave);
+  margin-bottom: 4px;
+}
+
+/* ---------- Opciones (radio / checkbox) ---------- */
+
+.opciones {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.opciones.en-linea {
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+.opciones.en-linea .opcion { flex: 1 0 60px; text-align: center; }
+
+.opcion {
+  position: relative;
+}
+
+.opcion input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.opcion label {
+  display: block;
+  padding: 13px 16px;
+  border: 1.5px solid var(--borde-fuerte);
+  border-radius: var(--radio-chico);
+  cursor: pointer;
+  font-size: 15px;
+  transition: border-color 0.15s ease, background 0.15s ease, color 0.15s ease;
+  user-select: none;
+}
+
+.opcion input:checked + label {
+  border-color: var(--seccion-color, var(--azul));
+  background: var(--seccion-color-suave, var(--azul-suave));
+  color: var(--tinta);
+  font-weight: 700;
+}
+
+.opcion input:focus-visible + label {
+  outline: 2px solid var(--seccion-color, var(--azul));
+  outline-offset: 2px;
+}
+
+.opcion-check label::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  margin-right: 10px;
+  border: 1.5px solid var(--borde-fuerte);
+  border-radius: 5px;
+  vertical-align: -3px;
+  background: #fff;
+}
+
+.opcion-check input:checked + label::before {
+  background: var(--seccion-color, var(--azul));
+  border-color: var(--seccion-color, var(--azul));
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='white' d='M6.4 11.2 3.2 8l-1.1 1.1L6.4 13.4l7.5-7.5L12.8 4.8z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ---------- Progreso ---------- */
+
+.progreso-wrap {
+  max-width: var(--ancho-maximo);
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.progreso-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+  color: var(--tinta-suave);
+  margin-bottom: 8px;
+  font-weight: 700;
+}
+
+.progreso-barra {
+  height: 8px;
+  background: var(--borde);
+  border-radius: 99px;
+  overflow: hidden;
+  margin-bottom: 22px;
+}
+
+.progreso-relleno {
+  height: 100%;
+  border-radius: 99px;
+  background: var(--seccion-color, var(--azul));
+  transition: width 0.35s ease, background 0.35s ease;
+}
+
+.progreso-puntos {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 22px;
+}
+
+.progreso-punto {
+  flex: 1;
+  height: 6px;
+  border-radius: 99px;
+  background: var(--borde);
+  transition: background 0.25s ease;
+}
+
+.progreso-punto.hecho { background: var(--punto-color, var(--azul)); }
+.progreso-punto.actual { background: var(--punto-color, var(--azul)); opacity: 0.5; }
+
+/* ---------- Encabezado de sección (con color rotativo tipo pieza de rompecabezas) ---------- */
+
+.seccion-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--seccion-color, var(--azul));
+  margin-bottom: 10px;
+}
+
+.seccion-eyebrow::before {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--seccion-color, var(--azul));
+  display: inline-block;
+  transform: rotate(45deg);
+}
+
+.seccion-titulo {
+  font-size: 22px;
+  margin-bottom: 6px;
+}
+
+.seccion-descripcion {
+  color: var(--tinta-suave);
+  font-size: 14.5px;
+  margin-bottom: 26px;
+}
+
+/* ---------- Pantalla de selección de edad ---------- */
+
+.opciones-edad {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-top: 8px;
+}
+
+.tarjeta-edad {
+  display: block;
+  text-align: left;
+  padding: 22px 20px;
+  border-radius: var(--radio);
+  border: 1.5px solid var(--borde);
+  background: var(--tarjeta);
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.tarjeta-edad:hover {
+  border-color: var(--azul);
+  box-shadow: var(--sombra-flotante);
+  transform: translateY(-2px);
+}
+
+.tarjeta-edad .rango {
+  font-family: var(--fuente-display);
+  font-size: 19px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.tarjeta-edad .desc {
+  font-size: 14px;
+  color: var(--tinta-suave);
+}
+
+.tarjeta-edad.deshabilitada {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: #F4F2EE;
+}
+.tarjeta-edad.deshabilitada:hover {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--borde);
+}
+
+.etiqueta-proximamente {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 11px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--marron);
+  padding: 4px 10px;
+  border-radius: 99px;
+}
+
+/* ---------- Pantalla de confirmación ---------- */
+
+.pantalla-final {
+  text-align: center;
+  padding: 60px 24px;
+}
+
+.pantalla-final .icono {
+  width: 78px;
+  height: 78px;
+  margin: 0 auto 22px;
+}
+
+.pantalla-final h1 { font-size: 25px; }
+
+.pantalla-final p {
+  color: var(--tinta-suave);
+  max-width: 420px;
+  margin: 0 auto 8px;
+}
+
+/* ---------- Utilidades ---------- */
+
+.oculto { display: none !important; }
+
+.error-mensaje {
+  color: var(--naranja);
+  font-size: 13.5px;
+  font-weight: 700;
+  margin-top: 6px;
+  display: none;
+}
+.campo.con-error .error-mensaje { display: block; }
+
+.pie-app {
+  text-align: center;
+  font-size: 12px;
+  color: var(--tinta-suave);
+  padding: 30px 20px 10px;
+  opacity: 0.7;
+}
+
+@media (max-width: 420px) {
+  .tarjeta { padding: 22px 18px; border-radius: 14px; }
+  .seccion-titulo { font-size: 19px; }
+  .btn { padding: 13px 20px; font-size: 15px; }
+}
