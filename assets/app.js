@@ -4,7 +4,7 @@
 
 // ⚠️ IMPORTANTE: reemplazar esta URL por la del Apps Script publicado
 // (Paso 3 de la guía de configuración). Termina en /exec
-const APPS_SCRIPT_URL = "PEGAR_AQUI_LA_URL_DEL_APPS_SCRIPT";
+const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbxhQk2q7z2hviGxJ1ZQaeZ4pgYub8ZgEbrBxSwjDIK7HhWONyqBMmURUC8nMIBLTI0A/exec";
 
 const NOMBRES_SECCION = [
   "Datos del paciente",
