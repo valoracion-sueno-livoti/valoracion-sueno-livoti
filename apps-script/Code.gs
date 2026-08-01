@@ -136,7 +136,6 @@ function agregarResumen(body, r) {
   const encabezado = body.appendParagraph("Resumen de sueño");
   encabezado.setHeading(DocumentApp.ParagraphHeading.HEADING1);
 
-  const tabla = body.appendTable();
   const filas = [
     ["Indicador", "Valor", "Referencia"],
     [
@@ -170,16 +169,11 @@ function agregarResumen(body, r) {
     ]
   ];
 
-  filas.forEach((fila, i) => {
-    const filaTabla = i === 0 ? tabla.getRow(0) : tabla.appendTableRow();
-    fila.forEach((texto, j) => {
-      const celda = i === 0 ? filaTabla.getCell(j) : filaTabla.appendTableCell();
-      celda.setText(texto);
-      if (i === 0) {
-        celda.editAsText().setBold(true);
-      }
-    });
-  });
+  const tabla = body.appendTable(filas);
+  const filaEncabezado = tabla.getRow(0);
+  for (let j = 0; j < filas[0].length; j++) {
+    filaEncabezado.getCell(j).editAsText().setBold(true);
+  }
 
   const nota = body.appendParagraph(
     "Estas referencias son orientativas (según edad y bibliografía de sueño infantil) y no constituyen un diagnóstico. La interpretación clínica queda a criterio del profesional."
